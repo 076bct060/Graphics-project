@@ -1,0 +1,29 @@
+﻿  ConsoleApplication1.cpp
+C:\Users\sachi\source\repos\ConsoleApplication1\ConsoleApplication1\ConsoleApplication1.cpp(24,10): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
+C:\Users\sachi\source\repos\ConsoleApplication1\ConsoleApplication1\ConsoleApplication1.cpp(25,11): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+C:\Users\sachi\source\repos\ConsoleApplication1\ConsoleApplication1\ConsoleApplication1.cpp(31,33): warning C4244: 'argument': conversion from 'float' to 'GLint', possible loss of data
+C:\Users\sachi\source\repos\ConsoleApplication1\ConsoleApplication1\ConsoleApplication1.cpp(31,20): warning C4244: 'argument': conversion from 'float' to 'GLint', possible loss of data
+C:\Users\sachi\source\repos\ConsoleApplication1\ConsoleApplication1\ConsoleApplication1.cpp(32,33): warning C4244: 'argument': conversion from 'float' to 'GLint', possible loss of data
+C:\Users\sachi\source\repos\ConsoleApplication1\ConsoleApplication1\ConsoleApplication1.cpp(32,20): warning C4244: 'argument': conversion from 'float' to 'GLint', possible loss of data
+C:\Users\sachi\source\repos\ConsoleApplication1\ConsoleApplication1\ConsoleApplication1.cpp(33,33): warning C4244: 'argument': conversion from 'float' to 'GLint', possible loss of data
+C:\Users\sachi\source\repos\ConsoleApplication1\ConsoleApplication1\ConsoleApplication1.cpp(33,20): warning C4244: 'argument': conversion from 'float' to 'GLint', possible loss of data
+C:\Users\sachi\source\repos\ConsoleApplication1\ConsoleApplication1\ConsoleApplication1.cpp(34,33): warning C4244: 'argument': conversion from 'float' to 'GLint', possible loss of data
+C:\Users\sachi\source\repos\ConsoleApplication1\ConsoleApplication1\ConsoleApplication1.cpp(34,20): warning C4244: 'argument': conversion from 'float' to 'GLint', possible loss of data
+C:\Users\sachi\source\repos\ConsoleApplication1\ConsoleApplication1\ConsoleApplication1.cpp(52,11): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+C:\Users\sachi\source\repos\ConsoleApplication1\ConsoleApplication1\ConsoleApplication1.cpp(57,33): warning C4244: 'argument': conversion from 'float' to 'GLint', possible loss of data
+C:\Users\sachi\source\repos\ConsoleApplication1\ConsoleApplication1\ConsoleApplication1.cpp(57,20): warning C4244: 'argument': conversion from 'float' to 'GLint', possible loss of data
+C:\Users\sachi\source\repos\ConsoleApplication1\ConsoleApplication1\ConsoleApplication1.cpp(58,33): warning C4244: 'argument': conversion from 'float' to 'GLint', possible loss of data
+C:\Users\sachi\source\repos\ConsoleApplication1\ConsoleApplication1\ConsoleApplication1.cpp(58,20): warning C4244: 'argument': conversion from 'float' to 'GLint', possible loss of data
+C:\Users\sachi\source\repos\ConsoleApplication1\ConsoleApplication1\ConsoleApplication1.cpp(59,33): warning C4244: 'argument': conversion from 'float' to 'GLint', possible loss of data
+C:\Users\sachi\source\repos\ConsoleApplication1\ConsoleApplication1\ConsoleApplication1.cpp(59,20): warning C4244: 'argument': conversion from 'float' to 'GLint', possible loss of data
+C:\Users\sachi\source\repos\ConsoleApplication1\ConsoleApplication1\ConsoleApplication1.cpp(60,33): warning C4244: 'argument': conversion from 'float' to 'GLint', possible loss of data
+C:\Users\sachi\source\repos\ConsoleApplication1\ConsoleApplication1\ConsoleApplication1.cpp(60,20): warning C4244: 'argument': conversion from 'float' to 'GLint', possible loss of data
+ConsoleApplication1.obj : error LNK2019: unresolved external symbol __imp_glutInitWindowPosition referenced in function main
+ConsoleApplication1.obj : error LNK2019: unresolved external symbol __imp_glutInitWindowSize referenced in function main
+ConsoleApplication1.obj : error LNK2019: unresolved external symbol __imp_glutMainLoop referenced in function main
+ConsoleApplication1.obj : error LNK2019: unresolved external symbol __imp_glutDisplayFunc referenced in function main
+ConsoleApplication1.obj : error LNK2019: unresolved external symbol __imp___glutInitWithExit referenced in function glutInit_ATEXIT_HACK
+ConsoleApplication1.obj : error LNK2019: unresolved external symbol __imp___glutCreateWindowWithExit referenced in function glutCreateWindow_ATEXIT_HACK
+S:\Opengl\freeglut\lib\freeglut.lib : warning LNK4272: library machine type 'x86' conflicts with target machine type 'x64'
+S:\Opengl\glew-1.11.0\lib\glew32.lib : warning LNK4272: library machine type 'x86' conflicts with target machine type 'x64'
+C:\Users\sachi\source\repos\ConsoleApplication1\x64\Debug\ConsoleApplication1.exe : fatal error LNK1120: 6 unresolved externals
