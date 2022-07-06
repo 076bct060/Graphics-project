@@ -1,170 +1,100 @@
-////////////////////////////////////////////////////////////////////////////////////
-// texturedSphere.cpp
-//
-// This program applies an earth texture onto a sphere using the Mercator projection
-// as texture map.
-//
-// Interaction:
-// Press x, X, y, Y, z, Z to turn the sphere.
-//
-// Sumanta Guha
-//
-// Texture Credits: See ExperimenterSource/Textures/TEXTURE_CREDITS.txt
-////////////////////////////////////////////////////////////////////////////////////
+
 
 #define _USE_MATH_DEFINES 
 
-#include <cmath>        
-#include <cstdlib>
+#include <cmath>
 #include <iostream>
-#include <fstream>
 
 #include <GL/glew.h>
-#include <GL/freeglut.h> 
-
-#include "getBMP.h"
-
-#define R 12.0 // Radius of the sphere.
+#include <GL/freeglut.h>
 
 // Globals.
-static int p = 20; // Number of grid columns.
-static int q = 20; // Number of grid rows
-static float* vertices = NULL; // Vertex array of the mapped sample on the sphere.
-static float* textureCoordinates = NULL; // Texture co-ordinates array of the mapped sample on the sphere.
-static unsigned int texture[1]; // Array of texture indices.
-static float Xangle = 0.0, Yangle = 0.0, Zangle = 0.0; // Angles to rotate sphere.
-
-// Load image as a texture. 
-void loadTextures()
-{
-	imageFile* image[1];
-	image[0] = getBMP("earth.bmp");
-
-	glBindTexture(GL_TEXTURE_2D, texture[0]);
-	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, image[0]->width, image[0]->height, 0,
-		GL_RGBA, GL_UNSIGNED_BYTE, image[0]->data);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-}
-
-// Fuctions to map the grid vertex (u_i,v_j) to the mesh vertex (f(u_i,v_j), g(u_i,v_j), h(u_i,v_j)) on the sphere.
-float f(int i, int j)
-{
-	return (R * cos(-M_PI / 2.0 + (float)j / q * M_PI) * cos(2.0 * (float)i / p * M_PI));
-}
-
-float g(int i, int j)
-{
-	return (R * sin(-M_PI / 2.0 + (float)j / q * M_PI));
-}
-
-float h(int i, int j)
-{
-	return (-R * cos(-M_PI / 2.0 + (float)j / q * M_PI) * sin(2.0 * (float)i / p * M_PI));
-}
-
-// Routine to fill the vertex array with co-ordinates of the mapped sample points.
-void fillVertexArray(void)
-{
-	int i, j, k;
-
-	k = 0;
-	for (j = 0; j <= q; j++)
-		for (i = 0; i <= p; i++)
-		{
-			vertices[k++] = f(i, j);
-			vertices[k++] = g(i, j);
-			vertices[k++] = h(i, j);
-		}
-}
-
-// Routine to fill the texture co-ordinates array with the texture co-ordinate values at the mapped sample points.
-void fillTextureCoordArray(void)
-{
-	int i, j, k;
-
-	k = 0;
-	for (j = 0; j <= q; j++)
-		for (i = 0; i <= p; i++)
-		{
-			textureCoordinates[k++] = (float)i / p;
-			textureCoordinates[k++] = (float)j / q;
-		}
-}
+static int p = 30; 
+static int q = 30; 
+static float Xangle = 0.0, Yangle = 0.0, Zangle = 0.0; 
 
 // Initialization routine.
 void setup(void)
 {
-	// Enable depth testing and the vertex and texture coordinate arrays.
-	glEnable(GL_DEPTH_TEST);
-	glEnableClientState(GL_VERTEX_ARRAY);
-	glEnableClientState(GL_TEXTURE_COORD_ARRAY);
-
-	glClearColor(1.0, 1.0, 1.0, 0.0);
-
-	// Create texture ids.
-	glGenTextures(1, texture);
-
-	// Load texture.
-	loadTextures();
-
-	// Specify how texture values combine with current surface color values.
-	glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_REPLACE);
-
-	// Turn on OpenGL texturing.
-	glEnable(GL_TEXTURE_2D);
-
-	// Allocate space for vertex and texture coordinates array.
-	vertices = new float[3 * (p + 1) * (q + 1)];
-	textureCoordinates = new float[2 * (p + 1) * (q + 1)];
-
-	// Set the array pointers.
-	glVertexPointer(3, GL_FLOAT, 0, vertices);
-	glTexCoordPointer(2, GL_FLOAT, 0, textureCoordinates);
-
-	// Fill the vertex and texture co-ordinates arrays.
-	fillVertexArray();
-	fillTextureCoordArray();
-
-	// Cull the back faces of the sphere.
-	glEnable(GL_CULL_FACE);
-	glCullFace(GL_BACK);
+	glClearColor(0.0, 0.0, 0.0, 0.0);
 }
-
-// Drawing routine.
-void drawScene(void)
+void sphere(int radius)
 {
 	int  i, j;
-
-	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-
-	glLoadIdentity();
-	gluLookAt(0.0, 0.0, 25.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0);
-
-	// Commands to turn the sphere.
-	glRotatef(Zangle, 0.0, 0.0, 1.0);
-	glRotatef(Yangle, 0.0, 1.0, 0.0);
-	glRotatef(Xangle, 1.0, 0.0, 0.0);
-
-	// Map the texture onto the sphere.
-	glBindTexture(GL_TEXTURE_2D, texture[0]);
-	for (j = 0; j < q; j++)
+	for (j = 0; j < 2 * q; j++)
 	{
 		glBegin(GL_TRIANGLE_STRIP);
 		for (i = 0; i <= p; i++)
 		{
-			glArrayElement((j + 1) * (p + 1) + i);
-			glArrayElement(j * (p + 1) + i);
+			glVertex3f(radius * cos((float)(j + 1) / q * M_PI) * cos(2.0 * (float)i / p * M_PI),
+				radius * sin((float)(j + 1) / q * M_PI),
+				-radius * cos((float)(j + 1) / q * M_PI) * sin(2.0 * (float)i / p * M_PI));
+			glVertex3f(radius * cos((float)j / q * M_PI) * cos(2.0 * (float)i / p * M_PI),
+				radius * sin((float)j / q * M_PI),
+				-radius * cos((float)j / q * M_PI) * sin(2.0 * (float)i / p * M_PI));
 		}
 		glEnd();
 	}
+}
+// Drawing routine.
+void drawScene(void)
+{
 
-	glutSwapBuffers();
+
+	glClear(GL_COLOR_BUFFER_BIT);
+
+	glLoadIdentity();
+
+	//Sun
+	glTranslatef(0.0, 0.0, -10.0);
+	glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+	glColor3f(1.0, 1.0, 0.0);
+	sphere(5);
+	//Mercury
+	glTranslatef(7, 0.0, -10.0);
+	glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+	glColor3f(1.0, 0.0, 0.0);
+	sphere(1);
+	//Venus
+	glTranslatef(11, 0.0, -10.0);
+	glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+	glColor3f(.3, 0.0, .5);
+	sphere(1.5);
+	//Earth
+	glTranslatef(16, 0.0, -10.0);
+	glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+	glColor3f(1.0, 0.0, 0.0);
+	sphere(2.0);
+	//Mars
+	glTranslatef(21, 0.0, -10.0);
+	glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+	glColor3f(1.0, 0.0, 0.0);
+	sphere(1.2);
+	//Jupiter
+	glTranslatef(28, 0.0, -10.0);
+	glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+	glColor3f(1.0, 0.0, 0.0);
+	sphere(3.5);
+	//Saturn
+	glTranslatef(37, 0.0, -10.0);
+	glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+	glColor3f(1.0, 0.0, 0.0);
+	sphere(3.0);
+	//Uranus
+	glTranslatef(45.5, 0.0, -10.0);
+	glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+	glColor3f(1.0, 0.0, 0.0);
+	sphere(2.5);
+	//Neptune
+	glTranslatef(53.6, 0.0, -10.0);
+	glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+	glColor3f(1.0, 0.0, 0.0);
+	sphere(2.3);
+	glFlush();
 }
 
-// OpenGL window reshape routine.
+
+
 void resize(int w, int h)
 {
 	glViewport(0, 0, w, h);
@@ -172,16 +102,31 @@ void resize(int w, int h)
 	glLoadIdentity();
 	glFrustum(-5.0, 5.0, -5.0, 5.0, 5.0, 100.0);
 	glMatrixMode(GL_MODELVIEW);
-	glLoadIdentity();
 }
 
-// Keyboard input processing routine.
+
 void keyInput(unsigned char key, int x, int y)
 {
 	switch (key)
 	{
 	case 27:
 		exit(0);
+		break;
+	case 'P':
+		p += 1;
+		glutPostRedisplay();
+		break;
+	case 'p':
+		if (p > 3) p -= 1;
+		glutPostRedisplay();
+		break;
+	case 'Q':
+		q += 1;
+		glutPostRedisplay();
+		break;
+	case 'q':
+		if (q > 3) q -= 1;
+		glutPostRedisplay();
 		break;
 	case 'x':
 		Xangle += 5.0;
@@ -222,7 +167,9 @@ void keyInput(unsigned char key, int x, int y)
 void printInteraction(void)
 {
 	std::cout << "Interaction:" << std::endl;
-	std::cout << "Press x, X, y, Y, z, Z to turn the sphere." << std::endl;
+	std::cout << "Press P/p to increase/decrease the number of longitudinal slices." << std::endl
+		<< "Press Q/q to increase/decrease the number of latitudinal slices." << std::endl
+		<< "Press x, X, y, Y, z, Z to turn the hemisphere." << std::endl;
 }
 
 // Main routine.
@@ -234,10 +181,10 @@ int main(int argc, char** argv)
 	glutInitContextVersion(4, 3);
 	glutInitContextProfile(GLUT_COMPATIBILITY_PROFILE);
 
-	glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGBA | GLUT_DEPTH);
+	glutInitDisplayMode(GLUT_SINGLE | GLUT_RGBA);
 	glutInitWindowSize(500, 500);
 	glutInitWindowPosition(100, 100);
-	glutCreateWindow("texturedSphere.cpp");
+	glutCreateWindow("hemisphere.cpp");
 	glutDisplayFunc(drawScene);
 	glutReshapeFunc(resize);
 	glutKeyboardFunc(keyInput);
@@ -249,3 +196,4 @@ int main(int argc, char** argv)
 
 	glutMainLoop();
 }
+

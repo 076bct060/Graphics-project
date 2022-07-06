@@ -1,5 +1,17 @@
 ﻿  ConsoleApplication1.cpp
-C:\Users\sachi\source\repos\ConsoleApplication1\ConsoleApplication1\ConsoleApplication1.cpp(55,53): warning C4244: 'return': conversion from 'double' to 'float', possible loss of data
-C:\Users\sachi\source\repos\ConsoleApplication1\ConsoleApplication1\ConsoleApplication1.cpp(60,12): warning C4244: 'return': conversion from 'double' to 'float', possible loss of data
-C:\Users\sachi\source\repos\ConsoleApplication1\ConsoleApplication1\ConsoleApplication1.cpp(65,54): warning C4244: 'return': conversion from 'double' to 'float', possible loss of data
+C:\Users\sachi\source\repos\ConsoleApplication1\ConsoleApplication1\ConsoleApplication1.cpp(31,46): warning C4244: 'argument': conversion from 'double' to 'GLfloat', possible loss of data
+C:\Users\sachi\source\repos\ConsoleApplication1\ConsoleApplication1\ConsoleApplication1.cpp(30,12): warning C4244: 'argument': conversion from 'double' to 'GLfloat', possible loss of data
+C:\Users\sachi\source\repos\ConsoleApplication1\ConsoleApplication1\ConsoleApplication1.cpp(29,55): warning C4244: 'argument': conversion from 'double' to 'GLfloat', possible loss of data
+C:\Users\sachi\source\repos\ConsoleApplication1\ConsoleApplication1\ConsoleApplication1.cpp(34,40): warning C4244: 'argument': conversion from 'double' to 'GLfloat', possible loss of data
+C:\Users\sachi\source\repos\ConsoleApplication1\ConsoleApplication1\ConsoleApplication1.cpp(33,12): warning C4244: 'argument': conversion from 'double' to 'GLfloat', possible loss of data
+C:\Users\sachi\source\repos\ConsoleApplication1\ConsoleApplication1\ConsoleApplication1.cpp(32,49): warning C4244: 'argument': conversion from 'double' to 'GLfloat', possible loss of data
+C:\Users\sachi\source\repos\ConsoleApplication1\ConsoleApplication1\ConsoleApplication1.cpp(61,23): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
+C:\Users\sachi\source\repos\ConsoleApplication1\ConsoleApplication1\ConsoleApplication1.cpp(62,9): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+C:\Users\sachi\source\repos\ConsoleApplication1\ConsoleApplication1\ConsoleApplication1.cpp(67,9): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+C:\Users\sachi\source\repos\ConsoleApplication1\ConsoleApplication1\ConsoleApplication1.cpp(72,9): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+C:\Users\sachi\source\repos\ConsoleApplication1\ConsoleApplication1\ConsoleApplication1.cpp(77,9): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+C:\Users\sachi\source\repos\ConsoleApplication1\ConsoleApplication1\ConsoleApplication1.cpp(82,9): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+C:\Users\sachi\source\repos\ConsoleApplication1\ConsoleApplication1\ConsoleApplication1.cpp(87,9): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+C:\Users\sachi\source\repos\ConsoleApplication1\ConsoleApplication1\ConsoleApplication1.cpp(89,31): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
+C:\Users\sachi\source\repos\ConsoleApplication1\ConsoleApplication1\ConsoleApplication1.cpp(92,9): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
   ConsoleApplication1.vcxproj -> C:\Users\sachi\source\repos\ConsoleApplication1\Debug\ConsoleApplication1.exe
